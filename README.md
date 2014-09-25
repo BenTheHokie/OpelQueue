@@ -11,5 +11,5 @@ Queue tracker for opel.ece.vt.edu
 ##How to Use
 
 Function | Purpose | Output
--|-|-
-`__init__`|Initialization function|When an instance of queue is created, `__init__` will pull the queue from the OpEL website and load it into self.bigq
+ -------- | -------- | -------- 
+`__init__` | Initialization function | When an instance of queue is created, `__init__` will pull the queue from the OpEL website and load it into self.bigq
