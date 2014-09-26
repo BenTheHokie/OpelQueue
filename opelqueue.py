@@ -62,23 +62,31 @@ class queue:
         return _time.strftime('%I:%M:%S %p').lstrip('0') #strip the leading zeros to give a more "natural" look to the time display
     
     def setspc(self, string, length, spacechar=' '): #set spacing (useful for prettifying tables)
-        return string+spacechar*(length-len(string)) #basically returns a string with some spaces at a specified length
+        string=str(string)
+        if len(string)>length:
+            return string[:length]
+        else:
+            return string+spacechar*(length-len(string)) #basically returns a string with some spaces at a specified length
     
-    def strq(self, q):
-        ts=13 # set some constants for the amount of spacing: time space, room space, course space... etc
+    def strq(self, q): # output a queue in a readable table
+        # TODO: let the user input fields that they want to see in the output
+        ts=13 # set some constants for the amount of spacing: time space, difference space, room space, course space... etc
+        ds=8
         rs=10
         cs=8
         vs=10
         ns=20
         e='*empty*' # Empty constant string to cut down on physical code length (python needs constants)
-        final='%s|%s|%s|%s|%s\n'%( self.setspc('Time',ts) , self.setspc('Room',rs) , self.setspc('Class',cs) , self.setspc('VorQ',vs) , self.setspc('Name',ns) )
-        final+='%s+%s+%s+%s+%s\n'%('-'*ts,'-'*rs,'-'*cs,'-'*vs,'-'*ns) # table line
+        final='%s|%s|%s|%s|%s|%s\n'%( self.setspc('Time',ts) , self.setspc('Elapsed',ds) , self.setspc('Room',rs) , self.setspc('Class',cs) , self.setspc('VorQ',vs) , self.setspc('Name',ns) )
+        final+='%s+%s+%s+%s+%s+%s\n'%('-'*ts,'-'*ds,'-'*rs,'-'*cs,'-'*vs,'-'*ns) # table line
         if len(q)==0:
-            final+='%s|%s|%s|%s|%s\n'%( self.setspc(e,ts) , self.setspc(e,rs) , self.setspc(e,cs) , self.setspc(e,vs) , self.setspc(e,ns) )
+            final+='%s|%s|%s|%s|%s|%s\n'%( self.setspc(e,ts) , self.setspc(e,ds) , self.setspc(e,rs) , self.setspc(e,cs) , self.setspc(e,vs) , self.setspc(e,ns) )
         else:
             for i in range(len(q)):
-                final+='%s|%s|%s|%s|%s\n'%( self.setspc(self.time2str(q[i]['time']),ts) , self.setspc(q[i]['room'],rs) , self.setspc(q[i]['course'],cs) , self.setspc(q[i]['vorq'],vs) , self.setspc(q[i]['name'],ns) )
+                tdiff=datetime.datetime.today()-q[i]['time']
+                final+='%s|%s|%s|%s|%s|%s\n'%( self.setspc(self.time2str(q[i]['time']),ts) , self.setspc(str(datetime.timedelta(seconds=tdiff.seconds)),ds) , self.setspc(q[i]['room'],rs) , self.setspc(q[i]['course'],cs) , self.setspc(q[i]['vorq'],vs) , self.setspc(q[i]['name'],ns) )
         return final
+    
     
     def getqbyfield(self, field, value):
         final = []
