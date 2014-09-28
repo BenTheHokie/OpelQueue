@@ -18,7 +18,8 @@ BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
 
 ```python
 from opelqueue import queue
-q=queue(pid) # Specify optional localpage variable if you would like to use your own queue page (helpful for debugging)
+q=queue(pid) # Specify optional localpage variable if you would like to use your 
+             # own queue page (helpful for debugging)
 ```
 
 It is important to know that the complete queue variable is stored within `self.bigq`
