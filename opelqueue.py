@@ -5,7 +5,7 @@ import os
 from threading import Timer
 
 def cls():
-    os.system(['clear','cls'][os.name == 'nt'])
+    os.system(['clear','cls'][os.name == 'nt']) # Grabbed this clever snippet from popcnt on StackOverflow
 
 class queue:
     
@@ -28,7 +28,8 @@ class queue:
     
     def __init__(self, pid, localpage = None): #We can use local storage as an input, just provide the directory
         self.pid=pid
-        if localpage:
+        self.localpage=localpage
+        if self.localpage:
             f=open('page.htm','r') #if we want to use the local page, just pull it from the directory
             self.pgsrc=f.read()
             f.close()
