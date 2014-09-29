@@ -1,6 +1,20 @@
 # main.py, in general, run this.
-# This work is protected under the terms of the GNU GPL v2.0 license.
-# (c) Benjamin Wengert 2014
+# Benjamin Wengert - OpelQueue - Loads data off of the Virginia Tech OpEL's website
+# Copyright (C) 2014  Benjamin Wengert
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# 
+# Contact bwengert at vt dot edu
 
 from threading import Timer
 from opelqueue import queue
@@ -17,7 +31,7 @@ def cls():
 def pause():
     os.system(['read -p "Press any key to continue . . . "','pause'][os.name == 'nt']) # Made this one myself
 
-print "This work is protected under the terms of the GNU GPL v2.0 license.\n(c) Benjamin Wengert 2014\n\n"
+print "This program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, version 3\nCopyright (C) 2014  Benjamin Wengert\n\n"
 pid = raw_input('Please input your PID.\nPID: ')
 pwd = getpass.getpass('Please input your email password. Characters won\'t be shown.\nPWD: ')
 pn = raw_input('Please input your phone number (w/o spaces or dashes).\nNumber: ')
