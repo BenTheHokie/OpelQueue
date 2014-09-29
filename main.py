@@ -76,7 +76,7 @@ def rfsend(): #refresh sending
     if currpos:
         print "%s appears to be in room %s for a %s in %s and in position %i" % (p['name'],p['room'],p['vorq'],p['course'],pos)
         
-        if (pos and currpos != pos and currpos<=3):
+        if (pos and (currpos != pos) and currpos<=3):
             
             msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has moved from %i to %i in the room queue.' % (p['name'],pos,currpos)) )
             
@@ -89,7 +89,13 @@ def rfsend(): #refresh sending
         t.start()
         
     else:
-        print 'You have been removed from the queue.'
+        cls()
+        print time.strftime('%A, %B %d, %Y  %I:%M:%S %p\n',time.localtime())
+        print '\n'
+        print q.strq(q.bigq)
+        print '%s has been removed from the queue.' % p['name']
+        msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has been removed from the queue.' % (p['name'],pos,currpos)) )
+        text.send(msgs[-1:][0])
         pause()
 
 rfsend()

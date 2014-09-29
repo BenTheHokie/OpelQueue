@@ -56,13 +56,13 @@ class queue:
             self.bigq+=[self.data2dict(dlist)]
             
     
-    def parsetime(self, timestr):
+    def parsetime(self, timestr): # Turn a string into a time
         return datetime.datetime.strptime(timestr, '%Y-%m-%d %H:%M:%S') # Takes input in the style of the OpEL output eg, 2014-09-23 19:24:59
     
-    def time2str(self, _time):
+    def time2str(self, _time): # Turn a time into a string
         return _time.strftime('%I:%M:%S %p').lstrip('0') #strip the leading zeros to give a more "natural" look to the time display
     
-    def setspc(self, string, length, spacechar=' '): #set spacing (useful for prettifying tables)
+    def setspc(self, string, length, spacechar=' '): # set spacing (useful for prettifying tables)
         string=str(string)
         if len(string)>length:
             return string[:length]
@@ -77,7 +77,7 @@ class queue:
         cs=8
         vs=10
         ns=20
-        e='*empty*' # Empty constant string to cut down on physical code length (python needs constants)
+        e='*empty*' # Empty constant string to cut down on physical code length (python should implement constants)
         final='%s|%s|%s|%s|%s|%s\n'%( self.setspc('Time',ts) , self.setspc('Elapsed',ds) , self.setspc('Room',rs) , self.setspc('Class',cs) , self.setspc('VorQ',vs) , self.setspc('Name',ns) )
         final+='%s+%s+%s+%s+%s+%s\n'%('-'*ts,'-'*ds,'-'*rs,'-'*cs,'-'*vs,'-'*ns) # table line
         if len(q)==0:
@@ -105,7 +105,7 @@ class queue:
         except ValueError:
             return -1
 
-def refreshprint(pid,q):
+def refreshprint(pid,q): # Start a loop to refresh the queue every 10s (if the user runs this python script)
     if q.refresh:
         cls()
         q=queue(pid)
