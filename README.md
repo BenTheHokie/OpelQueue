@@ -1,9 +1,10 @@
 OpelQueue
 =========
 
-Queue tracker for opel.ece.vt.edu
+Queue tracker for opel.ece.vt.edu. When main.py is run, the script will ask for your Virginia Tech PID and email password as well as phone number and carrier. When you have moved into the 3rd position (and all positions after that) within the room you have signed up for, the script will send you a text message notifying you.
 
 ##DISCLAIMER
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
@@ -17,16 +18,19 @@ You should receive a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ##How to Use
+
 Ensure that BeautifulSoup is installed
 Run main.py
 
 ##Note
+
 This python script uses SMTP to deliver text messages to a phone. If you are uncomfortable with the use of SMTP, please do not use this script. I'm going to tell you right now, that I am not collecting your email and/or password. There's really no way I can prove this to you unless you look through the code. If you want to use this script, then use it and if not, then don't.
 
 ##Dependencies
 BeautifulSoup - http://www.crummy.com/software/BeautifulSoup/
 
 ##Goals
+
 1. Send a text via email when the student has moved into the 3rd position in the queue (for the specific room) and after all position changes after that
 2. Tell the user how long they've been waiting
 3. (Maybe ... probably not) Automatically add yourself to the queue

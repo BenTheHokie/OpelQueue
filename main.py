@@ -22,6 +22,7 @@ import os
 from sendtext import sendtext
 import getpass
 import time
+import datetime
 
 msgs=[]
 
@@ -67,10 +68,12 @@ except IndexError:
         name = raw_input("Your name could not be found in the queue. Please input your name in the queue.\nName: ")
         p=q.findbyname(name)
 
-rmq = q.getqbyfield('room',p['room'])
+rmq = q.getqbyfield('room',p['room']) # rmq is the queue of people only in the room that the specified person is in.
 pos = 1+q.findpos(p,rmq)
 rmq = q.getqbyfield('room',p['room'])
-msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s is in position %i in the room queue.' % (p['name'],pos)) )
+tdiff=datetime.datetime.today()-p['time'] # Finding the elapsed time
+
+msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s is in position %i in the room queue. Elapsed: %s' % (p['name'] , pos , str(datetime.timedelta(seconds=tdiff.seconds)).lstrip('0:'))) )
 text.send(msgs[-1:][0])
 
 def rfsend(): #refresh sending
@@ -91,8 +94,9 @@ def rfsend(): #refresh sending
         print "%s appears to be in room %s for a %s in %s and in position %i" % (p['name'],p['room'],p['vorq'],p['course'],pos)
         
         if (pos and (currpos != pos) and currpos<=3):
-            
-            msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has moved from %i to %i in the room queue.' % (p['name'],pos,currpos)) )
+            tdiff=datetime.datetime.today()-p['time']
+
+            msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has moved from %i to %i in the room queue. Elapsed: %s' % (p['name'],pos,currpos, str(datetime.timedelta(seconds=tdiff.seconds)).lstrip('0:') )) )
             
             print( '\nSENT (%s): %s' % ( pn, msgs[-1:][0].replace('\n',' ') ))
             
@@ -108,7 +112,9 @@ def rfsend(): #refresh sending
         print '\n'
         print q.strq(q.bigq)
         print '%s has been removed from the queue.' % p['name']
-        msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has been removed from the queue.' % (p['name'],pos,currpos)) )
+        tdiff=datetime.datetime.today()-p['time']
+
+        msgs.append( str(time.strftime('%a %m/%d %I:%M:%S %p\n',time.localtime())+'%s has been removed from the queue. Elapsed: %s' % (p['name'] , pos , currpos , str(datetime.timedelta(seconds=tdiff.seconds)).lstrip('0:'))) )
         text.send(msgs[-1:][0])
         pause()
 
