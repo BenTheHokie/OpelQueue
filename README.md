@@ -17,10 +17,12 @@ GNU General Public License for more details.
 You should receive a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Messaging and data rates may apply.
+
 ##How to Use
 
-Ensure that BeautifulSoup is installed
-Run main.py
+1. Ensure that BeautifulSoup is installed
+2. Run main.py
 
 ##Note
 
